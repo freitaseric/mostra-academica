@@ -36,7 +36,7 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 244 100% 3%;
     --foreground: 210 40% 98%;
 
     --card: 222.2 84% 4.9%;
@@ -72,18 +72,31 @@
   }
   body {
     @apply bg-background text-foreground;
+    height: 100vh;
+    background: linear-gradient(
+      to bottom,
+      #460591 25%,
+      #030031 75%,
+      #010011 100%
+    );
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 }
 
-* {
+/* * {
   color: white;
 }
 
 body {
   height: 100vh;
-  background: linear-gradient(to bottom, #460591 25%, #030031 75%, #010011 100%)
-    #010011;
+  background: linear-gradient(
+    to bottom,
+    #460591 25%,
+    #030031 75%,
+    #010011 100%
+  );
   background-color: #010011;
   background-size: cover;
   background-repeat: no-repeat;
-}
+} */
