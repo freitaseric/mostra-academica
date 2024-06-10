@@ -3,19 +3,22 @@
 import { cn } from '@/lib/utils'
 import { Book, XIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Alert, AlertDescription, AlertTitle, Button, Progress } from './ui'
+interface Store {
+  showAlert: boolean
+}
 
 export function RoadmapAlert() {
-  const showAlert = localStorage.getItem('show-alert')
-  const [showAgain, setShowAgain] = useState(showAlert !== 'false')
-  const [isAlertVisible, setIsAlertVisible] = useState(
-    !showAlert || showAlert === 'true',
-  )
+  const storage = useMemo(() => new AsyncLocalStorage<Store>(), [])
+  const store = storage.getStore()
+
+  const [showAgain, setShowAgain] = useState(true)
+  const [isAlertVisible, setIsAlertVisible] = useState(true)
   const [progress, setProgress] = useState(1)
   const router = useRouter()
 
-  useEffect(() => {
+  const alertLoop = useCallback(() => {
     if (!showAgain) return
     // eslint-disable-next-line prefer-const
     let intervalId: NodeJS.Timeout
@@ -42,7 +45,22 @@ export function RoadmapAlert() {
       clearInterval(intervalId)
       clearInterval(resetIntervalId)
     }
-  }, [isAlertVisible, progress, showAgain])
+  }, [progress, showAgain])
+
+  useEffect(() => {
+    if (!store) {
+      storage.enterWith({
+        showAlert: true,
+      })
+    }
+
+    if (!store?.showAlert) {
+      setShowAgain(false)
+      setIsAlertVisible(false)
+    }
+
+    return alertLoop()
+  }, [alertLoop, storage, store])
 
   return (
     <>
