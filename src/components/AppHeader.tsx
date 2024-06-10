@@ -26,6 +26,9 @@ export function AppHeader() {
               <Link href="/">Início</Link>
             </li>
             <li className="uppercase font-medium transition-all duration-500 hover:font-bold hover:text-lg">
+              <Link href="/roadmap">Roteiro</Link>
+            </li>
+            <li className="uppercase font-medium transition-all duration-500 hover:font-bold hover:text-lg">
               <Link href="/credits">Créditos</Link>
             </li>
           </ul>

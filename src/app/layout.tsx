@@ -1,3 +1,9 @@
+import {
+  AppFooter,
+  AppHeader,
+  MobileNavigator,
+  RoadmapAlert,
+} from '@/components'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
@@ -45,7 +51,11 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        <AppHeader />
+        <RoadmapAlert />
         {children}
+        <MobileNavigator />
+        <AppFooter />
       </body>
     </html>
   )
