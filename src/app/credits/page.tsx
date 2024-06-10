@@ -2,7 +2,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui'
 
 export default function CreditsPage() {
   return (
-    <main className="flex flex-1 flex-col justify-center items-center gap-8">
+    <main className="flex flex-1 flex-col justify-center items-center gap-8 mb-32 sm:mb-0">
       <h1 className="text-lg font-bold lg:text-2xl">Componentes do Grupo</h1>
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-4 sm:gap-8 lg:gap-24 2xl:gap-40 p-x-8">
         <HoverCard>
