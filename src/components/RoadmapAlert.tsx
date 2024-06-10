@@ -3,16 +3,10 @@
 import { cn } from '@/lib/utils'
 import { Book, XIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Alert, AlertDescription, AlertTitle, Button, Progress } from './ui'
-interface Store {
-  showAlert: boolean
-}
 
 export function RoadmapAlert() {
-  const storage = useMemo(() => new AsyncLocalStorage<Store>(), [])
-  const store = storage.getStore()
-
   const [showAgain, setShowAgain] = useState(true)
   const [isAlertVisible, setIsAlertVisible] = useState(true)
   const [progress, setProgress] = useState(1)
@@ -48,19 +42,8 @@ export function RoadmapAlert() {
   }, [progress, showAgain])
 
   useEffect(() => {
-    if (!store) {
-      storage.enterWith({
-        showAlert: true,
-      })
-    }
-
-    if (!store?.showAlert) {
-      setShowAgain(false)
-      setIsAlertVisible(false)
-    }
-
     return alertLoop()
-  }, [alertLoop, storage, store])
+  }, [alertLoop])
 
   return (
     <>
